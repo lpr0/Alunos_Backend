@@ -1,11 +1,11 @@
 import "dotenv/config"
+import { json } from "express";
 import jwt from "jsonwebtoken";
 
 function validarJWT (req, res, next) {
-    const header = req.header("*");
+    const header = req.header('Authorization');
     let token;
-    console.log(header);
-
+ 
     if (header) {
         header = header.split(" ");
         if (header.legth === 2) {
@@ -13,7 +13,7 @@ function validarJWT (req, res, next) {
         }
     }
     
-    if (token) {
+    if (!token) {
         res.status(401).json({ "message" : "Token JWT não fornecido"});
         return;
     }
