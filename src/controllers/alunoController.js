@@ -55,4 +55,24 @@ function excluirAluno (req, res) {
     }
 }
 
-export {listarAlunos, adiconarAluno, retornarLivro, atualizarAluno, excluirAluno};
+function medias (req, res) {
+   let medias = alunos.slice(0, -1);
+   
+   medias.map((alu) => {
+        return {"nome":alu.nome, "media": 0 + Number(alu.nota1) + Number(alu.nota2)}
+   })
+
+    res.status(200).json(medias);
+}
+
+function aprovados (req, res) {
+    let medias = alunos.slice(0, -1);
+   
+    medias.map((alu) => {
+        return {"nome":alu.nome, "media": ((0 + Number(alu.nota1) + Number(alu.nota2)) < 6) ? "reprovado" : "aprovado"}
+    })
+
+    res.status(200).json(medias);
+}
+
+export {listarAlunos, adiconarAluno, retornarLivro, atualizarAluno, excluirAluno, medias, aprovados};
