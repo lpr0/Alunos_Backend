@@ -1,0 +1,249 @@
+<html>
+    <head>
+        <title>Teste de requisições</title>
+        <meta charset="UTF-8" lang="PT-bt">
+    </head>
+    <body>
+        <style>
+            button {
+                margin-top: 10px;
+                margin-left: auto;
+                margin-left: auto;
+            }
+            h3 {
+                margin-top: 10px;
+                margin-left: 20px;
+            }
+        </style>
+
+        <h3> Abra o console</h3>
+        <button> TESTE Get all </button>
+        <button> TESTE Post </button>
+        <button> TESTE Get 3 </button>
+        <button> TESTE Put 3 </button>
+        <button> TESTE Delete 3 </button>
+        <button> teste Medias</button>
+        <button> teste Aprovados </button>
+        <br>
+        <button> TESTE registrar </button>
+        <button> TESTE login </button>
+        
+
+        <script>
+            const Bu = document.querySelectorAll("button");
+            const url = "http://localhost:3000/";
+
+            let token = ' ';
+
+            function get () {
+
+                let config = {
+                    "method" : "GET",
+                    "headers" : {"Authorization": `Bearer ${token}`, 'content-type': 'application/json'}
+                }
+
+                fetch(url + "alunos", config).then((res)=>{
+                    if (!res.ok) {
+                        throw new Error ("falha")
+                    }
+                    return res.json();
+                }).then((json)=> {
+                    console.log(json);
+                }).catch((erro)=>{
+                    console.log(erro);
+                })
+            }
+
+            function post () {
+
+                let ele = {
+                    id : 3,
+                    nome : "HIIi",
+                    ra : "6417844",
+                    nota1 : 10,
+                    nota2 : 5
+                }
+
+                const config = {
+                    "headers" : {"Authorization": `Bearer ${token}`, 'content-type': 'application/json'},
+                    "body" : JSON.stringify(ele),
+                    "method" : "POST"
+                }
+
+                fetch(url + "alunos", config).then((res)=>{
+                    if (!res.ok) {
+                        throw new Error ("falha")
+                    }
+                    return res.json();
+                }).then((json)=> {
+                    console.log(json);
+                }).catch((erro)=>{
+                    console.log(erro);
+                })
+            }
+            function getUm () {
+                let config = {
+                    "method" : "GET",
+                    "headers" : {"Authorization": `Bearer ${token}`}
+                }
+
+                fetch(url + "alunos" + "/3", config).then((res)=>{
+                    if (!res.ok) {
+                        throw new Error ("falha")
+                    }
+                    return res.json();
+                }).then((json)=> {
+                    console.log(json);
+                }).catch((erro)=>{
+                    console.log(erro);
+                })
+            }
+
+            function put () {
+
+                let ele = {
+                    id : 3,
+                    nome : "HIIi",
+                    ra : "6417844",
+                    nota1 : 8,
+                    nota2 : 6
+                }
+
+                const config = {
+                    "headers" : {"Authorization": `Bearer ${token}`, 'content-type': 'application/json'},
+                    "body" : JSON.stringify(ele),
+                    "method" : "PUT"
+                }
+
+                fetch(url + "alunos" + "/3", config).then((res)=>{
+                    if (!res.ok) {
+                        throw new Error ("falha")
+                    }
+                    return res.json();
+                }).then((json)=> {
+                    console.log(json);
+                }).catch((erro)=>{
+                    console.log(erro);
+                })
+            }
+
+            function del () {
+                let config = {
+                    "method" : "DELETE",
+                    "headers" : {"Authorization": `Bearer ${token}`}
+                }
+
+                fetch(url + "alunos" + "/3", config).then((res)=>{
+                    if (!res.ok) {
+                        throw new Error ("falha")
+                    }
+                    return res.json();
+                }).then((json)=> {
+                    console.log(json);
+                }).catch((erro)=>{
+                    console.log(erro);
+                })
+            }
+
+            function register () {
+
+                let ele = {
+                    username: "teste1",
+                    password: "HIIII"
+                }
+
+                const config = {
+                    headers: new Headers({'content-type': 'application/json'}),
+                    "body" : JSON.stringify(ele),
+                    "method" : "POST"
+                }
+
+                fetch(url + "register", config).then((res)=>{
+                    if (!res.ok) {
+                        throw new Error ("falha")
+                    }
+                    return res.json();
+                }).then((json)=> {
+                    console.log(json);
+                }).catch((erro)=>{
+                    console.log(erro);
+                })
+            }
+
+            function login () {
+
+                let ele = {
+                    username: "teste1",
+                    password: "HIIII"
+                }
+
+                const config = {
+                    headers: new Headers({'content-type': 'application/json'}),
+                    "body" : JSON.stringify(ele),
+                    "method" : "POST"
+                }
+
+                fetch(url + "login", config).then((res)=>{
+                    if (!res.ok) {
+                        throw new Error ("falha")
+                    }
+                    return res.json();
+                }).then((json)=> {
+                    console.log(json);
+                    token = json.jwt;
+                }).catch((erro)=>{
+                    console.log(erro);
+                })
+            }
+
+            function medias () {
+
+                let config = {
+                    "method" : "GET",
+                    "headers" : {"Authorization": `Bearer ${token}`, 'content-type': 'application/json'}
+                }
+
+                fetch(url + "alunos/medias", config).then((res)=>{
+                    if (!res.ok) {
+                        throw new Error ("falha")
+                    }
+                    return res.json();
+                }).then((json)=> {
+                    console.log(json);
+                }).catch((erro)=>{
+                    console.log(erro);
+                })
+            }
+
+            function aprovados () {
+
+                let config = {
+                    "method" : "GET",
+                    "headers" : {"Authorization": `Bearer ${token}`, 'content-type': 'application/json'}
+                }
+
+                fetch(url + "alunos/aprovados", config).then((res)=>{
+                    if (!res.ok) {
+                        throw new Error ("falha")
+                    }
+                    return res.json();
+                }).then((json)=> {
+                    console.log(json);
+                }).catch((erro)=>{
+                    console.log(erro);
+                })
+            }
+
+            Bu[0].addEventListener("click", get)
+            Bu[1].addEventListener("click", post)
+            Bu[2].addEventListener("click", getUm)
+            Bu[3].addEventListener("click", put)
+            Bu[4].addEventListener("click", del)
+            Bu[5].addEventListener("click", medias)
+            Bu[6].addEventListener("click", aprovados)
+            Bu[7].addEventListener("click", register)
+            Bu[8].addEventListener("click", login)  
+
+        </script>
+    </body>
+</html>

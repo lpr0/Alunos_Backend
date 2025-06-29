@@ -2,22 +2,21 @@ import "dotenv/config"
 import jwt from "jsonwebtoken";
 
 function validarJWT (req, res, next) {
-    const header = req.header('Authorization');
+    let header = req.header('Authorization');
     let token;
- 
+    
     if (header) {
         header = header.split(" ");
-        if (header.legth === 2) {
+        if (header.length === 2) {
             token = header[1]
         }
     }
-    
+
     if (!token) {
         res.status(401).json({ "message" : "Token JWT não fornecido"});
         return;
     }
    
-
     jwt.verify(token, process.env.CHAVE, (erro, user) => {
 
         if (erro) {
