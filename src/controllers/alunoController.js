@@ -1,4 +1,4 @@
-const alunos = [{id:1, nome:"teste", ra:"0000000", nota1:8.5, nota2:9.0}]
+const alunos = [{id:1, nome:"teste", ra:"0000000", nota1:8.5, nota2:9.0}, {id:2, nome:"teste2", ra:"1111111", nota1:5.5, nota2:6.0}]
 
 function encontrarID (id) {
     return alunos.findIndex((alu)=>{
@@ -56,20 +56,18 @@ function excluirAluno (req, res) {
 }
 
 function medias (req, res) {
-   let medias = alunos.slice(0, -1);
-   
-   medias.map((alu) => {
-        return {"nome":alu.nome, "media": 0 + Number(alu.nota1) + Number(alu.nota2)}
-   })
+    let medias = alunos.slice(0, alunos.length);
+    medias = medias.map((alu) => {
+        return {"nome":alu.nome, "media": (0 + alu.nota1 + alu.nota2) / 2}
+    })
 
     res.status(200).json(medias);
 }
 
 function aprovados (req, res) {
-    let medias = alunos.slice(0, -1);
-   
-    medias.map((alu) => {
-        return {"nome":alu.nome, "media": ((0 + Number(alu.nota1) + Number(alu.nota2)) < 6) ? "reprovado" : "aprovado"}
+    let medias = alunos.slice(0, alunos.length);
+    medias = medias.map((alu) => {
+        return {"nome":alu.nome, "status": ((0 + alu.nota1 + alu.nota2) < 12) ? "reprovado" : "aprovado"}
     })
 
     res.status(200).json(medias);

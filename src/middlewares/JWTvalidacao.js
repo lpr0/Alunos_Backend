@@ -1,5 +1,4 @@
 import "dotenv/config"
-import { json } from "express";
 import jwt from "jsonwebtoken";
 
 function validarJWT (req, res, next) {
